@@ -1,0 +1,12 @@
+	ioctl(fd, PERF_EVENT_IOC_RESET, 0);
+//#if 0
+        ret1=ioctl(fd, PERF_EVENT_IOC_ENABLE,0);
+
+        if (ret1<0) {
+                fprintf(stderr,"Error with PERF_EVENT_IOC_ENABLE "
+                        "of group leader: %d %s\n",
+                        errno,strerror(errno));
+                exit(1);
+        }
+	//ioctl(fd, PERF_EVENT_IOC_PEBS_INTERRUPT_COUNT, 0);
+//#endif

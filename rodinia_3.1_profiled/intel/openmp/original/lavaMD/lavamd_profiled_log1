@@ -1,0 +1,14 @@
+Configuration used: cores = 1, boxes1d = 25
+Time spent in different stages of CPU/MCPU KERNEL:
+ 0.000000000000 s,  0.000000000000 % : CPU/MCPU: VARIABLES
+ 0.000010000000 s,  0.000004415332 % : MCPU: SET DEVICE
+ 0.000000000000 s,  0.000000000000 % : CPU/MCPU: INPUTS
+226.483535766602 s, 99.999992370605 % : CPU/MCPU: KERNEL
+Total time:
+226.483551025391 s
+No overflow events generated.
+Total time:
+226.595703125000 s
+pebs_count: 1049
+count_total: 0
+Elapsed Time , 226.60, system, 0.02, user, 226.56, memory, 122456

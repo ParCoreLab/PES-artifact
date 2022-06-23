@@ -1,0 +1,10 @@
+number of received OS signals: 1319327
+number of sampling interrupts: 1319327
+number of sent OS signals: 1319327
+n_op_samples: 1319327 in thread 0
+n_lost_op_samples: 0
+Generate input matrix internally, size =4000
+Creating matrix internally size=4000
+running OMP on host
+Time consumed(ms): 78967.236000
+Elapsed Time , 79.02, system, 0.03, user, 78.96, memory, 64972

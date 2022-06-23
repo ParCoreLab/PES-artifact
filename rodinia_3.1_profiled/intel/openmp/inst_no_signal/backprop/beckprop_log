@@ -1,0 +1,8 @@
+Random number generator seed: 7
+Input layer size : 16777216
+Starting training kernel
+Performing CPU computation
+Training done
+elapsed time: 20.013
+count_total: 654586
+Elapsed Time , 20.13, system, 4.68, user, 15.39, memory, 2951324

@@ -1,0 +1,28 @@
+assignment to l3_reuse_distance_event MEM_LOAD_RETIRED happens here
+assignment to l3_reuse_distance_event MEM_LOAD_RETIRED happens here
+assignment to l3_reuse_distance_event MEM_LOAD_RETIRED happens here
+assignment to l3_reuse_distance_event MEM_LOAD_RETIRED happens here
+assignment to l3_reuse_distance_event MEM_LOAD_RETIRED happens here
+assignment to l3_reuse_distance_event MEM_LOAD_RETIRED happens here
+dbg register event 0, fd: 6, skid: 3, c: 5472720, t: 4, period: 100000, freq: 0
+dbg register event 0, fd: 7, skid: 3, c: 5472976, t: 4, period: 100000, freq: 0
+dbg register event 0, fd: 8, skid: 3, c: 5439953, t: 4, period: 100000, freq: 0
+dbg register event 0, fd: 9, skid: 3, c: 5439940, t: 4, period: 100000, freq: 0
+dbg register event 0, fd: 10, skid: 3, c: 5447876, t: 4, period: 100000, freq: 0
+dbg register event 0, fd: 11, skid: 3, c: 5439941, t: 4, period: 100000, freq: 0
+dbg register event 0, fd: 12, skid: 3, c: 5441745, t: 4, period: 100000, freq: 0
+dbg register event 0, fd: 13, skid: 3, c: 5440209, t: 4, period: 100000, freq: 0
+dbg register event 0, fd: 14, skid: 3, c: 5447877, t: 4, period: 100000, freq: 0
+dbg register event 0, fd: 15, skid: 3, c: 5443793, t: 4, period: 100000, freq: 0
+dbg register event 0, fd: 16, skid: 3, c: 5440721, t: 4, period: 100000, freq: 0
+dbg register event 0, fd: 17, skid: 3, c: 5441746, t: 4, period: 100000, freq: 0
+dbg register event 0, fd: 18, skid: 3, c: 5456068, t: 4, period: 100000, freq: 0
+dbg register event 0, fd: 19, skid: 3, c: 5447889, t: 4, period: 100000, freq: 0
+dbg register event 0, fd: 20, skid: 3, c: 5439954, t: 4, period: 100000, freq: 0
+dbg register event 0, fd: 21, skid: 3, c: 5440210, t: 4, period: 100000, freq: 0
+num of threads: 1
+frame progress: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 
+global_store_count: 0, global_load_count: 0, global_branch_count: 0, global_near_taken_branch_count: 0, global_lock_load_count: 0, global_near_return_count: 0, global_l1_miss_count: 0, global_l2_miss_count: 0, global_local_dram_count: 0, global_remote_dram_count: 0
+global_sample_count: 0
+elapsed time: 267.910
+Elapsed Time , 268.73, system, 0.17, user, 268.54, memory, 52972

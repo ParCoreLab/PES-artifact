@@ -1,0 +1,2 @@
+/usr/bin/time: cannot run ./omp/lud_omp: No such file or directory
+Elapsed Time , 0.00, system, 0.00, user, 0.00, memory, 1236
