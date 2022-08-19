@@ -151,19 +151,19 @@ make overhead_experiment
 
 cd exec-mode-amd
 
-# the following command compiles the linux kernel module that contains the kernel space code
+## the following command compiles the linux kernel module that contains the kernel space code
 
 make
 
-# the following command installs the linux kernel module
+## the following command installs the linux kernel module
 
 sudo insmod kern_code.ko
 
-# the following command compiles the user space code
+## the following command compiles the user space code
 
 gcc user_code.c cpu_check.c -o user_code -fopenmp
 
-# the following command runs the benchmark
+## the following command runs the benchmark
 
 sudo ./user_code
 
