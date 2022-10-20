@@ -54,8 +54,8 @@ overhead_experiment_fast:    install_all experiment_run
 prepare_data:
 	git clone https://github.com/msasongko17/rodinia_data; mv rodinia_data data
 	cd data/bfs/inputGen; make; ./graphgen 16777216 16M
-	cd hotspot/inputGen; make; ./hotspotex
-	cd kmeans/inpuGen; make; ./datagen 3000000
+	cd data/hotspot/inputGen; make; ./hotspotex
+	cd data/kmeans/inpuGen; make; ./datagen 3000000
 
 install_all:	original_install fetch_no_signal_install fetch_with_signal_install op_no_signal_install op_with_signal_install
 
