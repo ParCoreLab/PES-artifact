@@ -3,7 +3,7 @@ include common/make.config
 RODINIA_BASE_DIR := $(shell pwd)
 
 CUDA_BIN_DIR := $(RODINIA_BASE_DIR)/bin/linux/cuda
-OMP_BIN_DIR := $(RODINIA_BASE_DIR)/bin/linux/omp
+OMP_BIN_DIR := $(RODINIA_BASE_DIR)/bin
 OPENCL_BIN_DIR := $(RODINIA_BASE_DIR)/bin/linux/opencl
 
 CUDA_DIRS := backprop bfs cfd gaussian heartwall hotspot kmeans lavaMD leukocyte lud nn	nw srad streamcluster particlefilter pathfinder mummergpu
@@ -60,6 +60,7 @@ prepare_data:
 install_all:	original_install fetch_no_signal_install fetch_with_signal_install op_no_signal_install op_with_signal_install
 
 original_install:
+	mkdir $(OMP_BIN_DIR)
 	cd openmp/original/backprop;                             make;   cp backprop $(OMP_BIN_DIR)
 	cd openmp/original/bfs;                                  make;   cp bfs $(OMP_BIN_DIR)
 	cd openmp/original/cfd;                                  make;   cp euler3d_cpu euler3d_cpu_double pre_euler3d_cpu pre_euler3d_cpu_double $(OMP_BIN_DIR)
