@@ -165,7 +165,7 @@ gcc user_code.c cpu_check.c -o user_code -fopenmp
 
 ### the following command runs the benchmark
 
-sudo ./user_code
+sudo OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" ./user_code
 
 *******************************************************************************************
 
