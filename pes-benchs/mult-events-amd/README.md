@@ -11,11 +11,10 @@ sudo ./install_ibs_driver.sh
 
 3. Compile the benchmark by typing the following command in case your compiler is gcc
 
-gcc mult-events.c -o mult-events -fopenmp 
+make install
 
-3. Monitor the events by using the following commands.
+3. Run the profiled code by running the following command.
 
-GOMP_CPU_AFFINITY="0" OMP_NUM_THREADS=1 <path-to-Linux-kernel-module-code>/AMD_IBS_Toolkit/tools/ibs_monitor/ibs_monitor -o output_log -r 100000 ./mult-events
-<path-to-Linux-kernel-module-code>/AMD_IBS_Toolkit/tools/ibs_decoder/ibs_decoder -i output_log -o out.csv
+make run5x
 
-Event counts are printed on the screen and also available in out.csv
+Event counts are printed on the mult_events_log file.
