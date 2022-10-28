@@ -36,6 +36,7 @@
                 }
 
                 ioctl(fd[my_id], SET_BUFFER_SIZE, buffer_size);
+		ioctl(fd[my_id], ANY_MICRO_OP);
                 //ioctl(fd[cpu], SET_POLL_SIZE, poll_size / sizeof(ibs_op_t));
                 ioctl(fd[my_id], SET_MAX_CNT, op_cnt_max_to_set);
 #if 0

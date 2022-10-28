@@ -125,6 +125,7 @@ experiment_run:	original_run fetch_no_signal_run fetch_with_signal_run op_no_sig
 
 experiment_run_5x: original_run_5x fetch_no_signal_run_5x fetch_with_signal_run_5x op_no_signal_run_5x op_with_signal_run_5x
 
+op_experiment_run_5x: op_no_signal_run_5x op_with_signal_run_5x
 
 original_run:	lavamd_run lud_run nw_run pathfinder_run kmeans_run backprop_run cfd_run bfs_run hotspot_run heartwall_run
 original_run_5x:   lavamd_run_5x lud_run_5x nw_run_5x pathfinder_run_5x kmeans_run_5x backprop_run_5x cfd_run_5x bfs_run_5x hotspot_run_5x heartwall_run_5x
@@ -167,15 +168,15 @@ nw_run_5x:
 
 
 pathfinder_run:
-	        OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/original/pathfinder/pathfinder 100000 1000 $&> pathfinder_log
+	        OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/original/pathfinder/pathfinder 100000 1000 1> pathfinder_log 2> pathfinder_log
 
 
 pathfinder_run_5x:
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/original/pathfinder/pathfinder 100000 1000 $&> pathfinder_log1
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/original/pathfinder/pathfinder 100000 1000 $&> pathfinder_log2
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/original/pathfinder/pathfinder 100000 1000 $&> pathfinder_log3
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/original/pathfinder/pathfinder 100000 1000 $&> pathfinder_log4
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/original/pathfinder/pathfinder 100000 1000 $&> pathfinder_log5
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/original/pathfinder/pathfinder 100000 1000 1> pathfinder_log1 2> pathfinder_log1
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/original/pathfinder/pathfinder 100000 1000 1> pathfinder_log2 2> pathfinder_log2
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/original/pathfinder/pathfinder 100000 1000 1> pathfinder_log3 2> pathfinder_log3
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/original/pathfinder/pathfinder 100000 1000 1> pathfinder_log4 2> pathfinder_log4
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/original/pathfinder/pathfinder 100000 1000 1> pathfinder_log5 2> pathfinder_log5
 
 
 kmeans_run:
@@ -284,14 +285,14 @@ nw_fetch_no_signal_run_5x:
 
 
 pathfinder_fetch_no_signal_run:
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_no_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_fetch_no_signal_log
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_no_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_fetch_no_signal_log 2> pathfinder_fetch_no_signal_log
 
 pathfinder_fetch_no_signal_run_5x:
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_no_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_fetch_no_signal_log1
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_no_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_fetch_no_signal_log2
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_no_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_fetch_no_signal_log3
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_no_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_fetch_no_signal_log4
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_no_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_fetch_no_signal_log5
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_no_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_fetch_no_signal_log1 2> pathfinder_fetch_no_signal_log1
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_no_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_fetch_no_signal_log2 2> pathfinder_fetch_no_signal_log2
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_no_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_fetch_no_signal_log3 2> pathfinder_fetch_no_signal_log3
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_no_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_fetch_no_signal_log4 2> pathfinder_fetch_no_signal_log4
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_no_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_fetch_no_signal_log5 2> pathfinder_fetch_no_signal_log5
 
 
 kmeans_fetch_no_signal_run:
@@ -399,14 +400,14 @@ nw_fetch_with_signal_run_5x:
 
 
 pathfinder_fetch_with_signal_run:
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_with_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_fetch_with_signal_log
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_with_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_fetch_with_signal_log 2> pathfinder_fetch_with_signal_log
 
 pathfinder_fetch_with_signal_run_5x:
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_with_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_fetch_with_signal_log1
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_with_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_fetch_with_signal_log2
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_with_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_fetch_with_signal_log3
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_with_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_fetch_with_signal_log4
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_with_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_fetch_with_signal_log5
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_with_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_fetch_with_signal_log1 2> pathfinder_fetch_with_signal_log1
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_with_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_fetch_with_signal_log2 2> pathfinder_fetch_with_signal_log2
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_with_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_fetch_with_signal_log3 2> pathfinder_fetch_with_signal_log3
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_with_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_fetch_with_signal_log4 2> pathfinder_fetch_with_signal_log4
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/fetch_with_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_fetch_with_signal_log5 2> pathfinder_fetch_with_signal_log5
 
 
 kmeans_fetch_with_signal_run:
@@ -509,14 +510,14 @@ nw_op_no_signal_run_5x:
 	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_no_signal/nw/needle 32768 10 1 2>&1 | tee nw_op_no_signal_log5
 
 pathfinder_op_no_signal_run:
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_no_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_op_no_signal_log
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_no_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_op_no_signal_log 2> pathfinder_op_no_signal_log
 
 pathfinder_op_no_signal_run_5x:
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_no_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_op_no_signal_log1
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_no_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_op_no_signal_log2
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_no_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_op_no_signal_log3
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_no_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_op_no_signal_log4
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_no_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_op_no_signal_log5
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_no_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_op_no_signal_log1 2> pathfinder_op_no_signal_log1
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_no_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_op_no_signal_log2 2> pathfinder_op_no_signal_log2
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_no_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_op_no_signal_log3 2> pathfinder_op_no_signal_log3
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_no_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_op_no_signal_log4 2> pathfinder_op_no_signal_log4
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_no_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_op_no_signal_log5 2> pathfinder_op_no_signal_log5
 
 
 kmeans_op_no_signal_run:
@@ -624,14 +625,14 @@ nw_op_with_signal_run_5x:
 
 
 pathfinder_op_with_signal_run:
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_with_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_op_with_signal_log
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_with_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_op_with_signal_log 2> pathfinder_op_with_signal_log
 
 pathfinder_op_with_signal_run_5x:
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_with_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_op_with_signal_log1
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_with_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_op_with_signal_log2
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_with_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_op_with_signal_log3
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_with_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_op_with_signal_log4
-	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_with_signal/pathfinder/pathfinder 100000 1000 $&> pathfinder_op_with_signal_log5
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_with_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_op_with_signal_log1 2> pathfinder_op_with_signal_log1
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_with_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_op_with_signal_log2 2> pathfinder_op_with_signal_log2
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_with_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_op_with_signal_log3 2> pathfinder_op_with_signal_log3
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_with_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_op_with_signal_log4 2> pathfinder_op_with_signal_log4
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./openmp/op_with_signal/pathfinder/pathfinder 100000 1000 1> pathfinder_op_with_signal_log5 2> pathfinder_op_with_signal_log5
 
 
 kmeans_op_with_signal_run:

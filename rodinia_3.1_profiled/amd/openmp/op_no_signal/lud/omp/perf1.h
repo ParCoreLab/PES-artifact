@@ -36,6 +36,7 @@ clock_t start, end;
                 }
 
                 ioctl(fd[my_id], SET_BUFFER_SIZE, buffer_size);
+		ioctl(fd[my_id], ANY_MICRO_OP);
                 //ioctl(fd[cpu], SET_POLL_SIZE, poll_size / sizeof(ibs_op_t));
                 ioctl(fd[my_id], SET_MAX_CNT, op_cnt_max_to_set);
 #if 0
@@ -47,5 +48,5 @@ clock_t start, end;
                 //for (int i = 0; i < nopfds; i++)
                 ioctl(fd[my_id], RESET_BUFFER);
 #endif
-                ioctl(fd[my_id], REG_CURRENT_PROCESS);
+                //ioctl(fd[my_id], REG_CURRENT_PROCESS);
                 ioctl(fd[my_id], ASSIGN_FD, fd[my_id]);

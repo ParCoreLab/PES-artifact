@@ -48,6 +48,7 @@ clock_t start, end;
                 ioctl(fd[my_id], RESET_BUFFER);
 #endif
                 //ioctl(fd[my_id], REG_CURRENT_PROCESS);
+		ioctl(fd[my_id], ANY_MICRO_OP);
                 ioctl(fd[my_id], ASSIGN_FD, fd[my_id]);
 
                 ioctl(fd[my_id], RESET_BUFFER);

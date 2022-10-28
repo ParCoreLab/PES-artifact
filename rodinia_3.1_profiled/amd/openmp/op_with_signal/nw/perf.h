@@ -34,6 +34,9 @@
 #define GET_SIGNAL_COUNT 104
 #define GET_FETCH_SAMPLE_COUNT 105
 
+#define ANY_MICRO_OP 106
+#define CACHE_MISS_ONLY 107
+
 int interrupt_count = 0;
 
 int n_op_samples[1024];
