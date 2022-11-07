@@ -1,22 +1,20 @@
-all:	install run
 
 install:
-	gcc four-loads-asm.c -g -o four-loads-asm
+	gcc four-loads-asm.c -o four-loads-asm -fopenmp
 
-run:	four-loads-even four-loads-odd
+test:
+	GOMP_CPU_AFFINITY="0" OMP_NUM_THREADS=1 perf record -d -e mem_inst_retired.all_loads:up -c 100000 ./four-loads-asm 1>> bias_bench_log 2>> bias_bench_log
+	perf script -F time,ip,addr 1>> perf_log 2>> perf_log
+	var1=$$(awk '/val:/ {print $$6}' bias_bench_log) && awk -v pat="$$var1" '$$0 ~ pat {table[$$3]++;} END { for (key in table) { print key ": " table[key] } }' perf_log 1>> bias_bench_log 2>> bias_bench_log
 
-four-loads-even:
-	GOMP_CPU_AFFINITY="0" OMP_NUM_THREADS=1 /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" /home/msasongko17/research/hpctoolkit-bin/bin/hpcrun -e WP_COUNT -e MEM_UOPS_RETIRED:ALL_LOADS@100000 ./four-loads-asm
-	/home/msasongko17/research/hpctoolkit-bin/bin/hpcstruct ./four-loads-asm
-	/home/msasongko17/research/hpctoolkit-bin/bin/hpcprof -S ./four-loads-asm.hpcstruct -o four-loads-asm_database hpctoolkit-four-loads-asm-measurements
-	mkdir four-loads-even
-	mv four-loads-asm_database four-loads-even
-	rm -r ./four-loads-asm.hpcstruct hpctoolkit-four-loads-asm-measurements
+run5x:
+	GOMP_CPU_AFFINITY="0" OMP_NUM_THREADS=1 perf record -e mem_inst_retired.all_loads:up -c 100000 ./four-loads-asm 1>> inst_attr_log1 2>> inst_attr_log1
+	perf script -F time,event | grep "mem_inst_retired.all_loads" | wc -l 1>> mult_events_log 2>> mult_events_log
+	GOMP_CPU_AFFINITY="0" OMP_NUM_THREADS=1 perf record -e mem_inst_retired.all_loads:up -c 100000 ./four-loads-asm 1>> inst_attr_log2 2>> inst_attr_log2
+	GOMP_CPU_AFFINITY="0" OMP_NUM_THREADS=1 perf record -e mem_inst_retired.all_loads:up -c 100000 ./four-loads-asm 1>> inst_attr_log3 2>> inst_attr_log3
+	GOMP_CPU_AFFINITY="0" OMP_NUM_THREADS=1 perf record -e mem_inst_retired.all_loads:up -c 100000 ./four-loads-asm 1>> inst_attr_log4 2>> inst_attr_log4
+	GOMP_CPU_AFFINITY="0" OMP_NUM_THREADS=1 perf record -e mem_inst_retired.all_loads:up -c 100000 ./four-loads-asm 1>> inst_attr_log5 2>> inst_attr_log5
 
-four-loads-odd:
-	GOMP_CPU_AFFINITY="0" OMP_NUM_THREADS=1 /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" /home/msasongko17/research/hpctoolkit-bin/bin/hpcrun -e WP_COUNT -e MEM_UOPS_RETIRED:ALL_LOADS@100003 ./four-loads-asm
-	/home/msasongko17/research/hpctoolkit-bin/bin/hpcstruct ./four-loads-asm
-	/home/msasongko17/research/hpctoolkit-bin/bin/hpcprof -S ./four-loads-asm.hpcstruct -o four-loads-asm_database hpctoolkit-four-loads-asm-measurements
-	mkdir four-loads-odd
-	mv four-loads-asm_database four-loads-odd
-	rm -r ./four-loads-asm.hpcstruct hpctoolkit-four-loads-asm-measurements
+clean:
+	rm *_log*
+	rm four-loads-asm

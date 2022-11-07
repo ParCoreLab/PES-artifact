@@ -8,4 +8,4 @@ gcc mult-events.c -o mult-events -fopenmp
 3. Monitor the events by using the following command in case the number of events is 4, 
 you can change the arguments accordingly depending the event types and the number of events.
 
-GOMP_CPU_AFFINITY="0" OMP_NUM_THREADS=1  <path-to-perf-binary>/perf  perf record -e <name-of-event-1>:up -c 100000 -e <name-of-event-2>:up -c 100000 -e <name-of-event-3>:up -c 100000 -e <name-of-event-4>:up -c 100000  ./mult-events
+GOMP_CPU_AFFINITY="0" OMP_NUM_THREADS=1  <path-to-perf-binary>/perf record -e <name-of-event-1>:up -c 100000 -e <name-of-event-2>:up -c 100000 -e <name-of-event-3>:up -c 100000 -e <name-of-event-4>:up -c 100000  ./mult-events

@@ -3,7 +3,7 @@ include common/make.config
 RODINIA_BASE_DIR := $(shell pwd)
 
 CUDA_BIN_DIR := $(RODINIA_BASE_DIR)/bin/linux/cuda
-OMP_BIN_DIR := $(RODINIA_BASE_DIR)/bin/linux/omp
+OMP_BIN_DIR := $(RODINIA_BASE_DIR)/bin
 OPENCL_BIN_DIR := $(RODINIA_BASE_DIR)/bin/linux/opencl
 
 CUDA_DIRS := backprop bfs cfd gaussian heartwall hotspot kmeans lavaMD leukocyte lud nn	nw srad streamcluster particlefilter pathfinder mummergpu
@@ -60,6 +60,7 @@ prepare_data:
 install_all:	original_install l1_dcache_miss_no_signal_install l1_dcache_miss_with_signal_install inst_no_signal_install inst_with_signal_install mult_event_install
 
 original_install:
+	mkdir $(OMP_BIN_DIR)
 	cd openmp/original/backprop;                             make;   cp backprop $(OMP_BIN_DIR)
 	cd openmp/original/bfs;                                  make;   cp bfs $(OMP_BIN_DIR)
 	cd openmp/original/cfd;                                  make;   cp euler3d_cpu euler3d_cpu_double pre_euler3d_cpu pre_euler3d_cpu_double $(OMP_BIN_DIR)
@@ -135,6 +136,9 @@ experiment_run:	original_run l1_dcache_miss_no_signal_run l1_dcache_miss_with_si
 
 experiment_run_5x: original_run_5x l1_dcache_miss_no_signal_run_5x l1_dcache_miss_with_signal_run_5x inst_no_signal_run_5x inst_with_signal_run_5x overhead_mult_event_experiment_5x
 
+experiment_run_5x_min_original:	l1_dcache_miss_no_signal_run_5x l1_dcache_miss_with_signal_run_5x inst_no_signal_run_5x inst_with_signal_run_5x overhead_mult_event_experiment_5x
+
+experiment_run_5x_min_original_l1dcachamiss: l1_dcache_miss_with_signal_run_5x inst_no_signal_run_5x inst_with_signal_run_5x overhead_mult_event_experiment_5x
 
 original_run:	lavamd_run lud_run nw_run pathfinder_run kmeans_run backprop_run cfd_run bfs_run hotspot_run heartwall_run
 original_run_5x:   lavamd_run_5x lud_run_5x nw_run_5x pathfinder_run_5x kmeans_run_5x backprop_run_5x cfd_run_5x bfs_run_5x hotspot_run_5x heartwall_run_5x
