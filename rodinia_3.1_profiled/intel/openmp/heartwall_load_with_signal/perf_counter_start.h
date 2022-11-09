@@ -42,7 +42,7 @@ ioctl(fd15, PERF_EVENT_IOC_RESET, 0);
                 exit(1);
         }	
 //#endif
-#if 0
+//#if 0
         //fprintf(stderr, "counter 2 is initialized\n");
         ret=ioctl(fd2, PERF_EVENT_IOC_ENABLE,0);
 
