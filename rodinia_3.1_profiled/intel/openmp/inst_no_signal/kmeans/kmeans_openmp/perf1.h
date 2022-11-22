@@ -1,6 +1,8 @@
 	clock_t start, end;
         double cpu_time_used;
 
+	int pebs_count;
+
         int ret;
         //int fd;
         int mmap_pages=1+MMAP_DATA_SIZE;

@@ -25,22 +25,22 @@ int main() {
           indices[i*32] = t;
         }	
 
+	for (i = 0; i < SIZE; i += 32) {
+                        asm volatile("clflush (%0)\n\t"
+                                :
+                                : "r"(&indices[i])
+                                : "memory");
+                }
+
+                asm volatile("sfence\n\t"
+                        :
+                        :
+                        : "memory");
+
+                start = clock();
+
         #pragma omp parallel
         {
-
-		for (i = 0; i < SIZE; i += 32) {
-            		asm volatile("clflush (%0)\n\t"
-                         	: 
-                         	: "r"(&indices[i])
-                         	: "memory");
- 		}
-
- 		asm volatile("sfence\n\t"
-                 	:
-                 	:
-                 	: "memory");	
-
-		start = clock();
 		__asm__ __volatile__ ("movl $1000000, %%edx\n\t"
                 	"loop1:\n\t"
                 	"movl $1000, %%eax\n\t"
@@ -173,11 +173,11 @@ int main() {
                 	: "c" (indices)
                 	: "%edx", "%eax", "%ebx", "memory", "cc"
                 );
-		end = clock();
-
-		cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 
 	}
+	end = clock();
+
+        cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 	printf("elapsed time: %0.3lf\n", cpu_time_used);
 	free(indices);	
 	return 0;

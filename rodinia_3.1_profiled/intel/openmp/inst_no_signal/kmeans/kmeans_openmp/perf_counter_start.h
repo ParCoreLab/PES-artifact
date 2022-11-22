@@ -1,5 +1,6 @@
 ioctl(fd, PERF_EVENT_IOC_RESET, 0);
 //#if 0
+	ioctl(fd, PERF_EVENT_IOC_PEBS_SAMPLE_COUNT, 0);
         ret=ioctl(fd, PERF_EVENT_IOC_ENABLE,0);
 
         if (ret<0) {

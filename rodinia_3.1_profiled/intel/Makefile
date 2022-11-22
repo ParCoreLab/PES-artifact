@@ -140,6 +140,7 @@ mult_event_install:
 
 experiment_run:	original_run l1_dcache_miss_no_signal_run l1_dcache_miss_with_signal_run inst_no_signal_run inst_with_signal_run overhead_mult_event_experiment
 
+experiment_run_min_original: l1_dcache_miss_no_signal_run l1_dcache_miss_with_signal_run inst_no_signal_run inst_with_signal_run overhead_mult_event_experiment
 
 experiment_run_5x: original_run_5x l1_dcache_miss_no_signal_run_5x l1_dcache_miss_with_signal_run_5x inst_no_signal_run_5x inst_with_signal_run_5x overhead_mult_event_experiment_5x
 
@@ -801,6 +802,12 @@ heartwall_set4_with_signal_5x:
 
 
 overhead_mult_event_experiment:      heartwall_load_no_signal heartwall_load_with_signal heartwall_set1_no_signal heartwall_set1_with_signal heartwall_set2_no_signal heartwall_set2_with_signal heartwall_set3_no_signal heartwall_set3_with_signal heartwall_set4_no_signal heartwall_set4_with_signal
+
+heartwall_load_no_signal:
+	GOMP_CPU_AFFINITY="0" OMP_NUM_THREADS=1 /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" openmp/heartwall_load/heartwall data/heartwall/test.avi 104 1 2>&1 | tee heartwall_load_no_signal_log
+
+heartwall_load_with_signal:
+	GOMP_CPU_AFFINITY="0" OMP_NUM_THREADS=1 /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" openmp/heartwall_load_with_signal/heartwall data/heartwall/test.avi 104 1 2>&1 | tee heartwall_load_with_signal_log
 
 heartwall_set1_no_signal:
 	GOMP_CPU_AFFINITY="0" OMP_NUM_THREADS=1 /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" openmp/heartwall_set1/heartwall data/heartwall/test.avi 104 1 2>&1 | tee heartwall_set1_no_signal_log

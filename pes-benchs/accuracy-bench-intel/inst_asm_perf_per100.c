@@ -144,35 +144,35 @@ int main(int argc, char **argv) {
           indices[i*32] = t;
         }
 
-        #pragma omp parallel
-        {
-
-        for (i = 0; i < SIZE; i += 32) {
+	for (i = 0; i < SIZE; i += 32) {
             asm volatile("clflush (%0)\n\t"
                          :
                          : "r"(&indices[i])
                          : "memory");
-        }	
+        }
 
         asm volatile("sfence\n\t"
                  :
                  :
                  : "memory");
 
-	start = clock();
-	//ioctl(fd, PERF_EVENT_IOC_PEBS_INTERRUPT_COUNT, 0);
-	ioctl(fd, PERF_EVENT_IOC_RESET, 0);
+        start = clock();
+        //ioctl(fd, PERF_EVENT_IOC_PEBS_INTERRUPT_COUNT, 0);
+        ioctl(fd, PERF_EVENT_IOC_RESET, 0);
 
-	ret=ioctl(fd, PERF_EVENT_IOC_ENABLE,0);
+        ret=ioctl(fd, PERF_EVENT_IOC_ENABLE,0);
 
-	if (ret<0) {
-		fprintf(stderr,"Error with PERF_EVENT_IOC_ENABLE "
-			"of group leader: %d %s\n",
-			errno,strerror(errno));
-		exit(1);
-	}	
+        if (ret<0) {
+                fprintf(stderr,"Error with PERF_EVENT_IOC_ENABLE "
+                        "of group leader: %d %s\n",
+                        errno,strerror(errno));
+                exit(1);
+        }
 
-	ioctl(fd, PERF_EVENT_IOC_PEBS_SAMPLE_COUNT, 0);
+        ioctl(fd, PERF_EVENT_IOC_PEBS_SAMPLE_COUNT, 0);	
+
+        #pragma omp parallel
+        {
 	__asm__ __volatile__ ("movl $1000000, %%edx\n\t"
                 "loop1:\n\t"
                 "movl $1000, %%eax\n\t"
@@ -306,14 +306,14 @@ int main(int argc, char **argv) {
                 : "%edx", "%eax", "%ebx", "memory", "cc"
                 );
 
-	pebs_count = ioctl(fd, PERF_EVENT_IOC_PEBS_SAMPLE_COUNT, 0);
-	ret=ioctl(fd, PERF_EVENT_IOC_REFRESH,0);
+	}
 
-	end = clock();
+	pebs_count = ioctl(fd, PERF_EVENT_IOC_PEBS_SAMPLE_COUNT, 0);
+        ret=ioctl(fd, PERF_EVENT_IOC_REFRESH,0);
+
+        end = clock();
 
         cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-
-	}
 
         printf("elapsed time: %0.3lf\n", cpu_time_used);
 	if (count_total==0) {
