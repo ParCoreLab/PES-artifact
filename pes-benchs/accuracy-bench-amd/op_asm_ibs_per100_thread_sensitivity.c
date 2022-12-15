@@ -285,10 +285,9 @@ int main()
                 //ioctl(fd[cpu], SET_POLL_SIZE, poll_size / sizeof(ibs_op_t));
                 ioctl(fd[my_id], SET_MAX_CNT, op_cnt_max_to_set);
 
-		//ioctl(fd[my_id], REG_CURRENT_PROCESS); 
-		ioctl(fd[my_id], ASSIGN_FD, fd[my_id]);
-		//ioctl(fd[my_id], ANY_MICRO_OP);
-		ioctl(fd[my_id], CACHE_MISS_ONLY);
+		ioctl(fd[my_id], REG_CURRENT_PROCESS);
+                ioctl(fd[my_id], ASSIGN_FD, fd[my_id]);
+                ioctl(fd[my_id], ANY_MICRO_OP);	
 
 		for (i = 0; i < SIZE; i += 32) {
             		asm volatile("clflush (%0)\n\t"

@@ -122,6 +122,7 @@ op_with_signal_install:
 
 experiment_run:	original_run fetch_no_signal_run fetch_with_signal_run op_no_signal_run op_with_signal_run
 
+experiment_run_op_only:	op_no_signal_run op_with_signal_run
 
 experiment_run_5x: original_run_5x fetch_no_signal_run_5x fetch_with_signal_run_5x op_no_signal_run_5x op_with_signal_run_5x
 

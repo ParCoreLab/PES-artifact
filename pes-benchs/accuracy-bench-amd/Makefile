@@ -59,13 +59,34 @@ sampling-rate-sensitivity-install:   cache_misses_asm_ibs_per20_1M.c cache_misse
 cache-misses-ibs-per100-thread-sensitivity:
 	gcc cache_misses_asm_ibs_per100_thread_sensitivity.c cpu_check.c -o cache_misses_asm_ibs_per100_thread_sensitivity -fopenmp
 
+op-ibs-per100-thread-sensitivity:
+	gcc op_asm_ibs_per100_thread_sensitivity.c cpu_check.c -o op_asm_ibs_per100_thread_sensitivity -fopenmp
+
+fetch-ibs-per100-thread-sensitivity:
+	gcc fetch_asm_ibs_per100_thread_sensitivity.c cpu_check.c -o fetch_asm_ibs_per100_thread_sensitivity -fopenmp
+
+cache-misses-per100-thread-sensitivity:
+	gcc cache_misses_asm_per100_thread_sensitivity.c -o cache_misses_asm_per100_thread_sensitivity -fopenmp
+
 cache-misses-run-5x: cache-misses-20-run-5x cache-misses-40-run-5x cache-misses-60-run-5x cache-misses-80-run-5x cache-misses-100-run-5x
 
 cache-misses-run: cache-misses-20-run cache-misses-40-run cache-misses-60-run cache-misses-80-run cache-misses-100-run
 
+cache-misses-thread-sensitivity-ori-run: 1-thread-cache-misses-100-ori-run-thread-sensitivity 2-thread-cache-misses-100-ori-run-thread-sensitivity 4-thread-cache-misses-100-ori-run-thread-sensitivity 8-thread-cache-misses-100-ori-run-thread-sensitivity 16-thread-cache-misses-100-ori-run-thread-sensitivity 32-thread-cache-misses-100-ori-run-thread-sensitivity
+
 cache-misses-thread-sensitivity-run: 1-thread-cache-misses-100-run-thread-sensitivity 2-thread-cache-misses-100-run-thread-sensitivity 4-thread-cache-misses-100-run-thread-sensitivity 8-thread-cache-misses-100-run-thread-sensitivity 16-thread-cache-misses-100-run-thread-sensitivity 32-thread-cache-misses-100-run-thread-sensitivity
 
+fetch-thread-sensitivity-run: 1-thread-fetch-100-run-thread-sensitivity 2-thread-fetch-100-run-thread-sensitivity 4-thread-fetch-100-run-thread-sensitivity 8-thread-fetch-100-run-thread-sensitivity 16-thread-fetch-100-run-thread-sensitivity 32-thread-fetch-100-run-thread-sensitivity
+
+op-thread-sensitivity-run: 1-thread-op-100-run-thread-sensitivity 2-thread-op-100-run-thread-sensitivity 4-thread-op-100-run-thread-sensitivity 8-thread-op-100-run-thread-sensitivity 16-thread-op-100-run-thread-sensitivity 32-thread-op-100-run-thread-sensitivity
+
+cache-misses-thread-sensitivity-5x-ori-run: 1-thread-cache-misses-100-ori-run-5x-thread-sensitivity 2-thread-cache-misses-100-ori-run-5x-thread-sensitivity 4-thread-cache-misses-100-ori-run-5x-thread-sensitivity 8-thread-cache-misses-100-ori-run-5x-thread-sensitivity 16-thread-cache-misses-100-ori-run-5x-thread-sensitivity 32-thread-cache-misses-100-ori-run-5x-thread-sensitivity
+
 cache-misses-thread-sensitivity-5x-run: 1-thread-cache-misses-100-run-5x-thread-sensitivity 2-thread-cache-misses-100-run-5x-thread-sensitivity 4-thread-cache-misses-100-run-5x-thread-sensitivity 8-thread-cache-misses-100-run-5x-thread-sensitivity 16-thread-cache-misses-100-run-5x-thread-sensitivity 32-thread-cache-misses-100-run-5x-thread-sensitivity
+
+op-thread-sensitivity-5x-run: 1-thread-op-100-run-5x-thread-sensitivity 2-thread-op-100-run-5x-thread-sensitivity 4-thread-op-100-run-5x-thread-sensitivity 8-thread-op-100-run-5x-thread-sensitivity 16-thread-op-100-run-5x-thread-sensitivity 32-thread-op-100-run-5x-thread-sensitivity
+
+fetch-thread-sensitivity-5x-run: 1-thread-fetch-100-run-5x-thread-sensitivity 2-thread-fetch-100-run-5x-thread-sensitivity 4-thread-fetch-100-run-5x-thread-sensitivity 8-thread-fetch-100-run-5x-thread-sensitivity 16-thread-fetch-100-run-5x-thread-sensitivity 32-thread-fetch-100-run-5x-thread-sensitivity
 
 cache-misses-20-run-5x:
 	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per20 2>&1 | tee cache_misses_asm_per20_5x_log
@@ -105,6 +126,15 @@ cache-misses-100-run-5x:
 1-thread-cache-misses-100-run-thread-sensitivity:
 	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee 1_thread_cache_misses_per100_thread_sensitivity_log
 
+1-thread-op-100-run-thread-sensitivity:
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee 1_thread_op_per100_thread_sensitivity_log
+
+1-thread-fetch-100-run-thread-sensitivity:
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee 1_thread_fetch_per100_thread_sensitivity_log
+
+1-thread-cache-misses-100-ori-run-thread-sensitivity:
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee 1_thread_cache_misses_per100_thread_sensitivity_ori_log
+
 1-thread-cache-misses-100-run-5x-thread-sensitivity:
 	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee 1_thread_cache_misses_per100_thread_sensitivity_5x_log
 	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 1_thread_cache_misses_per100_thread_sensitivity_5x_log
@@ -112,8 +142,42 @@ cache-misses-100-run-5x:
 	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 1_thread_cache_misses_per100_thread_sensitivity_5x_log
 	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 1_thread_cache_misses_per100_thread_sensitivity_5x_log
 
+1-thread-op-100-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee 1_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 1_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 1_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 1_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 1_thread_op_per100_thread_sensitivity_5x_log
+
+1-thread-fetch-100-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee 1_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 1_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 1_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 1_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 1_thread_fetch_per100_thread_sensitivity_5x_log
+
+
+
+1-thread-cache-misses-100-ori-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee 1_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 1_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 1_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 1_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 1_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+
 2-thread-cache-misses-100-run-thread-sensitivity:
 	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee 2_thread_cache_misses_per100_thread_sensitivity_log
+
+2-thread-op-100-run-thread-sensitivity:
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee 2_thread_op_per100_thread_sensitivity_log
+
+2-thread-fetch-100-run-thread-sensitivity:
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee 2_thread_fetch_per100_thread_sensitivity_log
+
+
+
+2-thread-cache-misses-100-ori-run-thread-sensitivity:
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee 2_thread_cache_misses_per100_thread_sensitivity_ori_log
 
 2-thread-cache-misses-100-run-5x-thread-sensitivity:
 	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee 2_thread_cache_misses_per100_thread_sensitivity_5x_log
@@ -122,8 +186,42 @@ cache-misses-100-run-5x:
 	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 2_thread_cache_misses_per100_thread_sensitivity_5x_log
 	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 2_thread_cache_misses_per100_thread_sensitivity_5x_log
 
+2-thread-op-100-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee 2_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 2_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 2_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 2_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 2_thread_op_per100_thread_sensitivity_5x_log
+
+2-thread-fetch-100-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee 2_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 2_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 2_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 2_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 2_thread_fetch_per100_thread_sensitivity_5x_log
+
+
+
+2-thread-cache-misses-100-ori-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee 2_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 2_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 2_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 2_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=2 GOMP_CPU_AFFINITY="0 1" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 2_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+
 4-thread-cache-misses-100-run-thread-sensitivity:
 	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee 4_thread_cache_misses_per100_thread_sensitivity_log
+
+4-thread-op-100-run-thread-sensitivity:
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee 4_thread_op_per100_thread_sensitivity_log
+
+4-thread-fetch-100-run-thread-sensitivity:
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee 4_thread_fetch_per100_thread_sensitivity_log
+
+
+
+4-thread-cache-misses-100-ori-run-thread-sensitivity:
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee 4_thread_cache_misses_per100_thread_sensitivity_ori_log
 
 4-thread-cache-misses-100-run-5x-thread-sensitivity:
 	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee 4_thread_cache_misses_per100_thread_sensitivity_5x_log
@@ -132,8 +230,42 @@ cache-misses-100-run-5x:
 	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 4_thread_cache_misses_per100_thread_sensitivity_5x_log
 	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 4_thread_cache_misses_per100_thread_sensitivity_5x_log
 
+4-thread-op-100-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee 4_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 4_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 4_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 4_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 4_thread_op_per100_thread_sensitivity_5x_log
+
+4-thread-fetch-100-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee 4_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 4_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 4_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 4_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 4_thread_fetch_per100_thread_sensitivity_5x_log
+
+
+
+4-thread-cache-misses-100-ori-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee 4_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 4_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 4_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 4_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=4 GOMP_CPU_AFFINITY="0 1 2 3" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 4_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+
 8-thread-cache-misses-100-run-thread-sensitivity:
 	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee 8_thread_cache_misses_per100_thread_sensitivity_log
+
+8-thread-op-100-run-thread-sensitivity:
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee 8_thread_op_per100_thread_sensitivity_log
+
+8-thread-fetch-100-run-thread-sensitivity:
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee 8_thread_fetch_per100_thread_sensitivity_log
+
+
+
+8-thread-cache-misses-100-ori-run-thread-sensitivity:
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee 8_thread_cache_misses_per100_thread_sensitivity_ori_log
 
 8-thread-cache-misses-100-run-5x-thread-sensitivity:
 	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee 8_thread_cache_misses_per100_thread_sensitivity_5x_log
@@ -142,8 +274,42 @@ cache-misses-100-run-5x:
 	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 8_thread_cache_misses_per100_thread_sensitivity_5x_log
 	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 8_thread_cache_misses_per100_thread_sensitivity_5x_log
 
+8-thread-op-100-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee 8_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 8_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 8_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 8_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 8_thread_op_per100_thread_sensitivity_5x_log
+
+8-thread-fetch-100-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee 8_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 8_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 8_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 8_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 8_thread_fetch_per100_thread_sensitivity_5x_log
+
+
+
+8-thread-cache-misses-100-ori-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee 8_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 8_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 8_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 8_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=8 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 8_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+
 16-thread-cache-misses-100-run-thread-sensitivity:
 	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee 16_thread_cache_misses_per100_thread_sensitivity_log
+
+16-thread-op-100-run-thread-sensitivity:
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee 16_thread_op_per100_thread_sensitivity_log
+
+16-thread-fetch-100-run-thread-sensitivity:
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee 16_thread_fetch_per100_thread_sensitivity_log
+
+
+
+16-thread-cache-misses-100-ori-run-thread-sensitivity:
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee 16_thread_cache_misses_per100_thread_sensitivity_ori_log
 
 16-thread-cache-misses-100-run-5x-thread-sensitivity:
 	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee 16_thread_cache_misses_per100_thread_sensitivity_5x_log
@@ -152,8 +318,41 @@ cache-misses-100-run-5x:
 	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 16_thread_cache_misses_per100_thread_sensitivity_5x_log
 	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 16_thread_cache_misses_per100_thread_sensitivity_5x_log
 
+16-thread-op-100-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee 16_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 16_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 16_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 16_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 16_thread_op_per100_thread_sensitivity_5x_log
+
+16-thread-fetch-100-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee 16_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 16_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 16_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 16_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 16_thread_fetch_per100_thread_sensitivity_5x_log
+
+
+16-thread-cache-misses-100-ori-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee 16_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 16_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 16_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 16_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=16 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 16_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+
 32-thread-cache-misses-100-run-thread-sensitivity:
 	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee 32_thread_cache_misses_per100_thread_sensitivity_log
+
+32-thread-op-100-run-thread-sensitivity:
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee 32_thread_op_per100_thread_sensitivity_log
+
+32-thread-fetch-100-run-thread-sensitivity:
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee 32_thread_fetch_per100_thread_sensitivity_log
+
+
+
+32-thread-cache-misses-100-ori-run-thread-sensitivity:
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee 32_thread_cache_misses_per100_thread_sensitivity_ori_log
 
 32-thread-cache-misses-100-run-5x-thread-sensitivity:
 	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee 32_thread_cache_misses_per100_thread_sensitivity_5x_log
@@ -163,6 +362,29 @@ cache-misses-100-run-5x:
 	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 32_thread_cache_misses_per100_thread_sensitivity_5x_log
 
 
+32-thread-op-100-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee 32_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 32_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 32_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 32_thread_op_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./op_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 32_thread_op_per100_thread_sensitivity_5x_log
+
+
+32-thread-fetch-100-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee 32_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 32_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 32_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 32_thread_fetch_per100_thread_sensitivity_5x_log
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./fetch_asm_ibs_per100_thread_sensitivity 2>&1 | tee -a 32_thread_fetch_per100_thread_sensitivity_5x_log
+
+
+
+32-thread-cache-misses-100-ori-run-5x-thread-sensitivity:
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee 32_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 32_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 32_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 32_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
+	OMP_NUM_THREADS=32 GOMP_CPU_AFFINITY="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per100_thread_sensitivity 2>&1 | tee -a 32_thread_cache_misses_per100_thread_sensitivity_5x_ori_log
 
 cache-misses-20-run:
 	OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" /usr/bin/time -f "Elapsed Time , %e, system, %S, user, %U, memory, %M" ./cache_misses_asm_per20 2>&1 | tee cache_misses_asm_per20_log
