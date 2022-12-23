@@ -58,7 +58,8 @@ make sampling-rate-sensitivity-5x
 
 cd ../bias-bench-intel
 
-make all
+make install
+make run5x
 
 8. Run the time overhead, memory overhead and multiple event monitoring overhead evaluation experiment using the Rodinia benchmark to reproduce the results from Intel presented in figure 7, in the memory overhead discussion subsection, and in table IV by running the following commands from the outside of the pes-benchs folder:
 
@@ -133,7 +134,8 @@ make sampling-rate-sensitivity-5x
 
 cd ../bias-bench-amd
 
-make all
+make install
+make run5x
 
 8. Run the time overhead, memory overhead and multiple event monitoring overhead evaluation experiment using the Rodinia benchmark to reproduce the results from AMD presented in figure 7, in the memory overhead discussion subsection, and in table IV by running the following commands from the outside of the pes-benchs folder:
 
