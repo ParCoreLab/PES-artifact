@@ -1,8 +1,8 @@
-# pes-artifact
-
 ## Publication:
 
 * M. A. Sasongko, M. Chabbi, P. H. J. Kelly and D. Unat, "Precise Event Sampling on AMD Versus Intel: Quantitative and Qualitative Comparison," in IEEE Transactions on Parallel and Distributed Systems, vol. 34, no. 5, pp. 1594-1608, May 2023, https://doi.org/10.1109/TPDS.2023.3257105
+
+## Reproducing Results:
 
 How to reproduce our experiment results in an Intel machine:
 
