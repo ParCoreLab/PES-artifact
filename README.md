@@ -1,5 +1,9 @@
 # pes-artifact
 
+## Publication:
+
+* M. A. Sasongko, M. Chabbi, P. H. J. Kelly and D. Unat, "Precise Event Sampling on AMD Versus Intel: Quantitative and Qualitative Comparison," in IEEE Transactions on Parallel and Distributed Systems, vol. 34, no. 5, pp. 1594-1608, May 2023, https://doi.org/10.1109/TPDS.2023.3257105
+
 How to reproduce our experiment results in an Intel machine:
 
 1. If you run Ubuntu, install all the dependencies to install a Linux kernel by running the following commands:
@@ -77,19 +81,19 @@ make overhead_experiment
 
 cd exec-mode-intel
 
-### the following command compiles the linux kernel module that contains the kernel space code
+- the following command compiles the linux kernel module that contains the kernel space code
 
 make
 
-### the following command installs the linux kernel module
+- the following command installs the linux kernel module
 
 sudo insmod kern_code.ko
 
-### the following command compiles the user space code
+- the following command compiles the user space code
 
 gcc user_code.c -o user_code
 
-### the following command runs the benchmark
+- the following command runs the benchmark
 
 sudo ./user_code
 
@@ -153,19 +157,19 @@ make overhead_experiment
 
 cd exec-mode-amd
 
-### the following command compiles the linux kernel module that contains the kernel space code
+- the following command compiles the linux kernel module that contains the kernel space code
 
 make
 
-### the following command installs the linux kernel module
+- the following command installs the linux kernel module
 
 sudo insmod kern_code.ko
 
-### the following command compiles the user space code
+- the following command compiles the user space code
 
 gcc user_code.c cpu_check.c -o user_code -fopenmp
 
-### the following command runs the benchmark
+- the following command runs the benchmark
 
 sudo OMP_NUM_THREADS=1 GOMP_CPU_AFFINITY="0" ./user_code
 
